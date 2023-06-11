@@ -1,0 +1,35 @@
+server:
+  port: 8003
+
+
+  # mybatis配置
+mybatis:
+  type-aliases-package: com.lingstudy.springcloud.pojo
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  configuration:
+    cache-enabled: true
+    # spring的配置
+spring:
+  application:
+    name: springcloud-provider-dept
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.113.231.244:3306/db03?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: lingstudy@0215
+
+
+# eureka配置
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/,http://localhost:7003/eureka/
+  instance:
+    instance-id: spring-cloud-provider-dept8003
+
+
+# info信息
+info:
+  app.name: lingstudy-springcloud
+  apply.info: 用于学习SpringCloud

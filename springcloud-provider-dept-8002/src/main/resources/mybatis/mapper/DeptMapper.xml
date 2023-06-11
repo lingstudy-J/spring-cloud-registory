@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lingstudy.mapper.DeptMapper">
+
+    <resultMap id="deptMap" type="com.lingstudy.springcloud.pojo.Dept">
+        <result column="deotno" property="deptNo"/>
+        <result column="dname" property="dName"/>
+        <result column="db_source" property="dbSource"/>
+    </resultMap>
+
+    <insert id="addDept" parameterType="com.lingstudy.springcloud.pojo.Dept">
+        insert into dept (dname,db_source) values(#{dName},#{dbSource})
+    </insert>
+
+    <update id="updateDept">
+        update dept
+        <set>
+            <if test="dName != null">
+                dname = #{dName},
+            </if>
+            db_source = DATABASE()
+            <where>
+                deptno = #{deptNo}
+            </where>
+        </set>
+    </update>
+
+    <delete id="deleteDeptByDeptNo">
+        delete from dept where deptno = #{deptNo}
+    </delete>
+
+    <select id="queryOfDeptNo" resultMap="deptMap">
+        select * from dept where deptno = #{deptNo}
+    </select>
+
+    <select id="queryAll" resultMap="deptMap">
+        select * from dept
+    </select>
+
+</mapper>
